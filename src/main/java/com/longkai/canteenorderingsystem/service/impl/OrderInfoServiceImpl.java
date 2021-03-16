@@ -23,7 +23,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public List<OrderInfo> findOrderInfo(OrderInfo orderInfo, Pager pager) {
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String,Object>();
         params.put("orderInfo", orderInfo);
         int recordCount = orderInfoDao.count(params);
         pager.setRowCount(recordCount);

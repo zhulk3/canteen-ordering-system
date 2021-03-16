@@ -43,7 +43,7 @@ public class AdminInfoController {
     @ResponseBody
     public List<TreeNode> getTree(@RequestParam(value = "adminid") String adminid) {
         AdminInfo adminInfo = adminInfoService.getAdminInfoAndFunctions(Integer.parseInt(adminid));
-        List<TreeNode> nodes = new ArrayList<>();
+        List<TreeNode> nodes = new ArrayList<TreeNode>();
         List<Functions> functionsList = adminInfo.getFs();
         Collections.sort(functionsList);
         for (Functions functions : functionsList) {

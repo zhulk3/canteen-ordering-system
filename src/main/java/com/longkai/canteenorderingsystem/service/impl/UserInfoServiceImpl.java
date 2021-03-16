@@ -34,7 +34,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public List<UserInfo> findUserInfo(UserInfo userInfo, Pager pager) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         map.put("userInfo", userInfo);
         int recordCount = userInfoDao.count(map);
         pager.setRowCount(recordCount);

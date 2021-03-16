@@ -73,5 +73,19 @@ public class OrderInfo {
     public String getOrderTimeTo() {
         return orderTimeTo;
     }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", ui=" + ui +
+                ", status='" + status + '\'' +
+                ", ordertime='" + ordertime + '\'' +
+                ", orderprice=" + orderprice +
+                ", orderTimeFrom='" + orderTimeFrom + '\'' +
+                ", orderTimeTo='" + orderTimeTo + '\'' +
+                '}';
+    }
 }
 

@@ -32,11 +32,11 @@ public class ProductInfoController {
         Pager pager = new Pager();
         pager.setCurPage(page);
         pager.setPerPageRows(rows);
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String,Object>();
         map.put("productInfo", productInfo);
         int totalCount = productInfoService.count(map);
         List<ProductInfo> productInfoList = productInfoService.findProductInfo(productInfo, pager);
-        Map<String, Object> result = new HashMap<>(2);
+        Map<String, Object> result = new HashMap<String,Object>(2);
         result.put("total", totalCount);
         result.put("rows", productInfoList);
         return result;

@@ -104,16 +104,14 @@ public class OrderInfoController {
         return str;
     }
 
-    @RequestMapping("/getOrderInfo")
+    @RequestMapping(value = "/getOrderInfo")
     public String getOrderInfo(@RequestParam("oid") String oid, Model model) throws Exception {
-        try {
-            OrderInfo oi = orderInfoService.getOrderInfoById(Integer.parseInt(oid));
-            model.addAttribute("oi", oi);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "/orderdetail.jsp";
+        OrderInfo oi = orderInfoService.getOrderInfoById(Integer.parseInt(oid));
+        System.out.println(oi);
+        model.addAttribute("oi", oi);
+
+        return "orderdetail";
     }
 
     @RequestMapping("/getOrderDetails")

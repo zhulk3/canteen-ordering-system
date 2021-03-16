@@ -91,4 +91,20 @@ public class UserInfo {
     public void setSchool(School school) {
         this.school = school;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", realName='" + realName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", regDate='" + regDate + '\'' +
+                ", status=" + status +
+                ", school=" + school +
+                '}';
+    }
 }

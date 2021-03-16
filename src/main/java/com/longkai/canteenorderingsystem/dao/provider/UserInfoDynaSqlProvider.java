@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class UserInfoDynaSqlProvider {
     // 分页动态查询
-    public String selectWithParam(Map<String, Object> params) {
+    public String selectWithParam(final Map<String, Object> params) {
         String sql = new SQL() {
             {
                 SELECT("*");
@@ -29,7 +29,7 @@ public class UserInfoDynaSqlProvider {
     }
 
     // 根据条件动态查询总记录数
-    public String count(Map<String, Object> params) {
+    public String count(final Map<String, Object> params) {
         return new SQL() {
             {
                 SELECT("count(*)");
