@@ -2,10 +2,7 @@ package com.longkai.canteenorderingsystem.dao;
 
 
 import com.longkai.canteenorderingsystem.pojo.Type;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +23,7 @@ public interface TypeDao {
     @Update("update type set name=#{name} where id=#{id}")
     int update(Type type);
 
+    @Delete("delete from type where id = #{id}")
+    int deleteType(int id);
 }
 

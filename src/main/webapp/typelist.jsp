@@ -20,9 +20,12 @@
 <table id="typeDg" class="easyui-datagrid"></table>
 <div id="typeTb" style="padding:2px 5px;">
     <a href="javascript:void(0)" class="easyui-linkbutton"
-       iconCls="icon-add" plain="true" onclick="addType();">添加</a> <a
+       iconCls="icon-add" plain="true" onclick="addType();">添加</a>
+    <a
         href="javascript:void(0)" class="easyui-linkbutton"
         iconCls="icon-edit" plain="true" onclick="editType();">修改</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove"
+       onclick="deleteType();" plain="true">删除类型</a>
 </div>
 
 <div id="typeDlg" class="easyui-dialog" title="New Type" closed="true"
@@ -31,7 +34,7 @@
         <form id="typeForm" method="POST" action="">
             <table cellpadding="5">
                 <tr>
-                    <td>产品名称:</td>
+                    <td>菜品类型:</td>
                     <td><input class="easyui-textbox" type="text" id="name"
                                name="name" data-options="required:true"></input></td>
                 </tr>
@@ -75,6 +78,41 @@
         $('#typeDlg').form('clear');
         urls = 'type/addType';
     }
+    function deleteType() {
+        // 获取选中的订单记录行
+        var rows = $("#typeDg").datagrid('getSelections');
+        if (rows.length > 0) {
+            $.messager.confirm('Confirm', '确认要删除么?', function(r) {
+                if (r) {
+                    var ids = "";
+                    // 获取选中订单记录的订单id, 保存到ids中
+                    for (var i = 0; i < rows.length; i++) {
+                        ids += rows[i].id + ",";
+                    }
+                    // 发送请求
+                    $.post('type/deleteType', {
+                        tids : ids
+                    }, function(result) {
+                        if (result.success == 'true') {
+                            $("#orderDg").datagrid('reload');
+                            $.messager.show({
+                                title : '提示信息',
+                                msg : result.message
+                            });
+                        } else {
+                            $.messager.show({
+                                title : '提示信息',
+                                msg : result.message
+                            });
+                        }
+                    }, 'json');
+
+                }
+            });
+        } else {
+            $.messager.alert('提示', '请选择要删除的行', 'info');
+        }
+    }
 
     function saveType() {
         $("#typeForm").form("submit", {
@@ -99,7 +137,7 @@
     function editType() {
         var row = $("#typeDg").datagrid("getSelected");
         if (row) {
-            $("#typeDlg").dialog("open").dialog('setTitle', '修改产品信息');
+            $("#typeDlg").dialog("open").dialog('setTitle', '修改菜品类型信息');
             $("#typeForm").form("load", {
                 "name" : row.name
             });

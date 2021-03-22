@@ -87,6 +87,7 @@ public class ProductInfoController {
             productInfoService.modifyProductInfo(pi);
             return "{\"success\":\"true\",\"message\":\"商品修改成功\"}";
         } catch (Exception e) {
+            e.printStackTrace();
             return "{\"success\":\"false\",\"message\":\"商品修改失败\"}";
         }
     }

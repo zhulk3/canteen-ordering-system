@@ -33,7 +33,7 @@ public class UserInfoController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public Map<String, Object> userlist(Integer page, Integer rows, UserInfo userInfo) {
+    public Map<String, Object> userInfoList(Integer page, Integer rows, UserInfo userInfo) {
         // 创建分页类对象
         Pager pager = new Pager();
         pager.setCurPage(page);
@@ -45,6 +45,7 @@ public class UserInfoController {
         int totalCount = userInfoService.count(params);
         // 根据查询条件，分页获取客户列表
         List<UserInfo> userinfos = userInfoService.findUserInfo(userInfo, pager);
+        System.out.println(userinfos);
         // 创建对象result，保存查询结果数据
         Map<String, Object> result = new HashMap<String, Object>(2);
         result.put("total", totalCount);

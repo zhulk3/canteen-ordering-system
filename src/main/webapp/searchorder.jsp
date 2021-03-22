@@ -93,7 +93,7 @@
             }, {
                 field : 'ordertime',
                 title : '订单时间',
-                width : 100
+                width : 200
             }, {
                 field : 'orderprice',
                 title : '订单金额',

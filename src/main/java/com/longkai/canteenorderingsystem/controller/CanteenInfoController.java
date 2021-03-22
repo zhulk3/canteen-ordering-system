@@ -1,7 +1,7 @@
 package com.longkai.canteenorderingsystem.controller;
 
-import com.longkai.canteenorderingsystem.pojo.Type;
-import com.longkai.canteenorderingsystem.service.TypeService;
+import com.longkai.canteenorderingsystem.pojo.Canteen;
+import com.longkai.canteenorderingsystem.service.CanteenInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,41 +11,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/type")
-public class TypeInfoController {
+@RequestMapping("/canteen")
+public class CanteenInfoController {
 
     @Autowired
-    private TypeService typeService;
+    private CanteenInfoService canteenInfoService;
 
-    @RequestMapping(value = "/getType/{flag}")
+    @RequestMapping(value = "/getCanteen")
     @ResponseBody
-    public List<Type> getType(@PathVariable("flag") Integer flag) {
-        List<Type> typeList = typeService.getAll();
-        if (flag == 1) {
-            Type t = new Type();
-            t.setId(0);
-            t.setName("请选择");
-            typeList.add(t);
-        }
-        return typeList;
+    public List<Canteen> getCanteen() {
+        List<Canteen> canteensList = canteenInfoService.getAll();
+        return canteensList;
     }
 
-    @RequestMapping(value = "/addType", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/addCanteen", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String addType(Type type) {
+    public String addCanteen(Canteen canteen) {
         try {
-            typeService.addType(type);
+            canteenInfoService.addCanteen(canteen);
             return "{\"success\":\"true\",\"message\":\"添加成功\"}";
         } catch (Exception e) {
+            e.printStackTrace();
             return "{\"success\":\"false\",\"message\":\"添加失败\"}";
         }
     }
 
-    @RequestMapping(value = "/updateType", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/updateCanteen", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String updateType(Type type) {
+    public String updateCanteen(Canteen canteen) {
         try {
-            typeService.updateType(type);
+            canteenInfoService.updateCanteen(canteen);
             return "{\"success\":\"true\",\"message\":\"修改成功\"}";
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,15 +48,15 @@ public class TypeInfoController {
         }
     }
 
-    @RequestMapping(value = "/deleteType",produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/deleteCanteen",produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String deleteType(String tids){
+    public String deleteCanteen(String cids){
         String str = "";
         try {
-            tids = tids.substring(0, tids.length() - 1);
-            String[] ids = tids.split(",");
+            cids = cids.substring(0, cids.length() - 1);
+            String[] ids = cids.split(",");
             for (String id : ids) {
-                typeService.deleteType(Integer.parseInt(id));
+                canteenInfoService.deleteCanteen(Integer.parseInt(id));
             }
             str = "{\"success\":\"true\",\"message\":\"删除成功！\"}";
         } catch (Exception e) {
@@ -70,5 +65,5 @@ public class TypeInfoController {
         }
         return str;
     }
-}
 
+}

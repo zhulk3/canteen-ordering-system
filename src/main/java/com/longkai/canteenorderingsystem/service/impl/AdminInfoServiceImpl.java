@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service("adminInfoService")
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -26,6 +28,31 @@ public class AdminInfoServiceImpl implements AdminInfoService {
     @Override
     public AdminInfo getAdminInfoAndFunctions(Integer id) {
         return adminInfoDao.selectById(id);
+    }
+
+    @Override
+    public int modifyPwd(AdminInfo adminInfo) {
+        return  adminInfoDao.modifyPwd(adminInfo);
+    }
+
+    @Override
+    public List<AdminInfo> selectAll() {
+        return adminInfoDao.selectAll();
+    }
+
+    @Override
+    public int deleteAdminInfo(int id) {
+        return adminInfoDao.deleteAdminInfo(id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminInfo adminInfo) {
+        return adminInfoDao.updateAdminInfo(adminInfo);
+    }
+
+    @Override
+    public int addAdmin(AdminInfo adminInfo) {
+        return adminInfoDao.addAdmin(adminInfo);
     }
 }
 

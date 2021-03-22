@@ -39,7 +39,7 @@ public class AdminInfoController {
         }
     }
 
-    @RequestMapping("getTree")
+    @RequestMapping("/getTree")
     @ResponseBody
     public List<TreeNode> getTree(@RequestParam(value = "adminid") String adminid) {
         AdminInfo adminInfo = adminInfoService.getAdminInfoAndFunctions(Integer.parseInt(adminid));
@@ -51,7 +51,11 @@ public class AdminInfoController {
             treeNode.setId(functions.getId());
             treeNode.setFid(functions.getParentId());
             treeNode.setText(functions.getName());
-            nodes.add(treeNode);
+            if (treeNode.getId() != 11) {
+                nodes.add(treeNode);
+            }
+
+
         }
         List<TreeNode> treeNodes = JsonFactory.buildTree(nodes, 0);
         return treeNodes;
@@ -63,5 +67,68 @@ public class AdminInfoController {
         sessionStatus.setComplete();
         return "{\"success\":\"true\",\"message\":\"注销成功\"}";
     }
+
+    @RequestMapping(value = "/modifyPassword", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String modifyPassword(AdminInfo adminInfo, String newpwd) {
+        AdminInfo ai = adminInfoService.login(adminInfo);
+        ai.setPwd(newpwd);
+        if (ai != null) {
+            adminInfoService.modifyPwd(ai);
+            return "{\"success\":\"true\",\"message\":\"修改成功\"}";
+        } else {
+            return "{\"success\":\"false\",\"message\":\"修改失败\"}";
+        }
+    }
+
+    @RequestMapping("/admininfoList")
+    @ResponseBody
+    public List<AdminInfo> getAdminList() {
+        List<AdminInfo> adminInfoList = adminInfoService.selectAll();
+        return adminInfoList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteAdminInfo", produces = "text/html;charset=UTF-8")
+    public String deleteAdminInfo(@RequestParam(value = "aids")String aids){
+        String str = "";
+        try {
+            aids = aids.substring(0, aids.length() - 1);
+            String[] ids = aids.split(",");
+            for (String id : ids) {
+                adminInfoService.deleteAdminInfo(Integer.parseInt(id));
+            }
+            str = "{\"success\":\"true\",\"message\":\"删除成功！\"}";
+        } catch (Exception e) {
+            e.printStackTrace();
+            str = "{\"success\":\"false\",\"message\":\"删除失败！\"}";
+        }
+        return str;
+    }
+
+    @RequestMapping(value = "/addAdmin")
+    @ResponseBody
+    public String addAdmin(AdminInfo adminInfo){
+        try {
+            adminInfoService.addAdmin(adminInfo);
+            return "{\"success\":\"true\",\"message\":\"添加成功\"}";
+        } catch (Exception e) {
+            return "{\"success\":\"false\",\"message\":\"添加失败\"}";
+        }
+    }
+
+    @RequestMapping(value = "/updateAdminInfo")
+    @ResponseBody
+    public String  updateAdminInfo(AdminInfo adminInfo){
+        try {
+            adminInfoService.updateAdminInfo(adminInfo);
+            return "{\"success\":\"true\",\"message\":\"修改成功\"}";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{\"success\":\"false\",\"message\":\"修改失败\"}";
+        }
+    }
+
+
 }
 

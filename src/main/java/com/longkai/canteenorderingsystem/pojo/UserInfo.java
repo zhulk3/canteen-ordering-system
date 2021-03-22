@@ -11,6 +11,24 @@ public class UserInfo {
     private String regDate;
     private int status;
     private School school;
+    private String sno;
+    private String balance;
+
+    public String getSno() {
+        return sno;
+    }
+
+    public void setSno(String sno) {
+        this.sno = sno;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
 
     public void setId(int id) {
         this.id = id;

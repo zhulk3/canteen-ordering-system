@@ -75,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>商品类型:</td>
-                    <td><input style="width: 150px;" id="type.id"
+                    <td><input style="width: 300px;" id="type.id"
                                class="easyui-combobox" name="type.id"
                                data-options="valueField:'id',textField:'name',url:'type/getType/0'"></input>
                     </td>
@@ -91,10 +91,6 @@
                                name="code" data-options="required:true"></input></td>
                 </tr>
                 <tr>
-                    <td>商品品牌:</td>
-                    <td><input class="easyui-textbox" type="text" id="brand"
-                               name="brand" data-options="required:true"></input></td>
-                </tr>
                 <tr>
                     <td>商品数量:</td>
                     <td><input class="easyui-textbox" type="text" id="num"
@@ -156,7 +152,7 @@
                         return value;
                     }
                 },
-                width : 60
+                width : 100
             }, {
                 field : 'status',
                 title : '商品状态',
@@ -172,11 +168,7 @@
                 field : 'code',
                 title : '商品编码',
                 width : 100
-            }, {
-                field : 'brand',
-                title : '品牌',
-                width : 120
-            }, {
+            },  {
                 field : 'price',
                 title : '价格',
                 width : 50
@@ -187,7 +179,7 @@
             }, {
                 field : 'intro',
                 title : '商品描述',
-                width : 450
+                width : 650
             } ] ]
         });
     });

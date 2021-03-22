@@ -11,5 +11,7 @@ public interface TypeService {
     int addType(Type type);
 
     void updateType(Type type);
+
+    int deleteType(int id);
 }
 

@@ -2,7 +2,8 @@
 SQLyog v10.2 
 MySQL - 5.5.27 : Database - canteen
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -47,7 +48,8 @@ CREATE TABLE `admin_info` (
 /*Data for the table `admin_info` */
 
 insert  into `admin_info`(`id`,`name`,`pwd`) values (1,'firstcanteen','123456'),(2,'secondcanteen','123456'),(3,'thirdcanteen','123456'),(4,'fourthcanteen','123456'),(5,'fifthcanteen','123456'),(6,'adminstrationcanteen','123456');
-
+alter table admin_info add email varchar(20) DEFAULT NULL;
+update admin_info set office='明德园南侧一楼202室',beginTime='2018-05-12 00:00:00',endTime='2018-05-12 22:00:00',telephone='13785332351',email='firstcanteen.com';
 /*Table structure for table `functions` */
 
 DROP TABLE IF EXISTS `functions`;
@@ -64,8 +66,8 @@ CREATE TABLE `functions` (
 
 /*Data for the table `functions` */
 
-insert  into `functions`(`id`,`name`,`parentid`,`url`,`isleaf`,`nodeorder`) values (1,'中山大学食堂订餐管理后台',0,NULL,'\0',0),(2,'菜品管理',1,NULL,'\0',1),(3,'菜品列表',2,NULL,'',1),(4,'菜品类型列表',2,NULL,'',2),(5,'订单管理',1,NULL,'\0',2),(6,'查询订单',5,NULL,'',1),(7,'创建订单',5,NULL,'',2),(8,'客户管理',1,NULL,'\0',3),(9,'客户列表',8,NULL,'',1),(11,'退出系统',1,NULL,'',1);
-
+insert  into `functions`(`id`,`name`,`parentid`,`url`,`isleaf`,`nodeorder`) values (1,'中山大学食堂订餐管理后台',0,NULL,'\0',0),(2,'菜品管理',1,NULL,'\0',1),(3,'菜品列表',2,NULL,'',1),(4,'菜品类型列表',2,NULL,'',2),(5,'订单管理',1,NULL,'\0',2),(6,'查询订单',5,NULL,'',1),(7,'创建订单',5,NULL,'',2),(8,'客户管理',1,NULL,'\0',3),(9,'客户列表',8,NULL,'',1),(10,'退出系统',1,NULL,'',1);
+insert  into `functions`(`id`,`name`,`parentid`,`url`,`isleaf`,`nodeorder`) values (12,'食堂信息管理',1,NULL,'\0',4),(13,'食堂管理',12,NULL,'',1),(14,'管理员信息',12,NULL,'',2);
 /*Table structure for table `order_detail` */
 
 DROP TABLE IF EXISTS `order_detail`;
@@ -122,7 +124,7 @@ CREATE TABLE `powers` (
 /*Data for the table `powers` */
 
 insert  into `powers`(`aid`,`fid`) values (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,11);
-
+insert into `powers`(`aid`,`fid`) values (1,12),(1,13),(1,14);
 /*Table structure for table `product_info` */
 
 DROP TABLE IF EXISTS `product_info`;
@@ -157,6 +159,20 @@ insert  into `product_info`(`id`,`code`,`name`,`tid`,`pic`,`num`,`price`,`intro`
 (10,'1560207','雪碧',7,'1560207.jpg',0100,'0000004','一款柠檬味汽水饮料，由可口可乐公司推出的第三个品牌',1),
 (11,'1721668','西湖醋鱼',5,'1721668.jpg',0100,'0000004','色泽红亮，肉质鲜嫩，酸甜清香，口感软嫩，带有蟹味',1),
 (12,'823125','东坡肉',6,'823125.jpg',0100,'0000005','成品菜都是码得整整齐齐的麻将块儿，红得透亮，色如玛瑙，夹起一块尝尝，软而不烂，肥而不腻',1);
+CREATE TABLE `canteens` (
+                            `id` int(4) NOT NULL AUTO_INCREMENT,
+                            `name` varchar(20) DEFAULT NULL,
+                            `address` varchar(20) DEFAULT NULL,
+                            `isServe` int(4) NOT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=gbk;
+insert  into `canteens`(`id`,`name`,`address`,`isServe`)values (1,'第一食堂','明德园南侧一楼',1);
+insert  into `canteens`(`id`,`name`,`address`,`isServe`) values (2,'第二食堂','明德园南侧二楼',1);
+insert  into `canteens`(`id`,`name`,`address`,`isServe`) values (3,'第三食堂','至善园西侧一楼',1);
+insert  into `canteens`(`id`,`name`,`address`,`isServe`) values (4,'第四食堂','至善园东侧二楼',1);
+insert  into `canteens`(`id`,`name`,`address`,`isServe`) values (5,'第五食堂','至善园东侧三楼',1);
+insert  into `canteens`(`id`,`name`,`address`,`isServe`) values (6,'第五食堂','至善园东侧三楼',1);
+
 
 /*Table structure for table `type` */
 
@@ -207,7 +223,11 @@ insert  into `user_info`(`id`,`userName`,`password`,`realName`,`sex`,`address`,`
 (4,'sj','123456','sj','男','慎思园3号楼','b@135.com','2015-09-16',1,4),
 (5,'lxf','123456','lxf','男','格致园8号楼','c@135.com','2015-09-16',1,7),
 (6,'lj','123456','lj','男','明德园2号楼','a@135.com','2015-09-20',1,8);/* Procedure structure for procedure `sp_sale` */
-
+update user_info set sno='1734453',balance=140 where id =2;
+update user_info set sno='1734332',balance=354 where id =3;
+update user_info set sno='1774421',balance=1530 where id =4;
+update user_info set sno='1431442',balance=744 where id =5;
+update user_info set sno='1753197',balance=930 where id =6;
 /*!50003 DROP PROCEDURE IF EXISTS  `sp_sale` */;
 
 DELIMITER $$

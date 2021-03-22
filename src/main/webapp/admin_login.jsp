@@ -49,7 +49,7 @@
             <tr>
                 <th >用户名</th>
                 <td><input class="easyui-textbox" type="text" id="name"
-                           name="name" data-options="required:true" value="admin"></input></td>
+                           name="name" data-options="required:true" value="firstcanteen"></input></td>
             </tr>
             <tr>
                 <th>密码</th>
