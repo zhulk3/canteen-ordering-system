@@ -3,6 +3,7 @@ package com.longkai.canteenorderingsystem.dao;
 
 
 import com.longkai.canteenorderingsystem.dao.provider.UserInfoDynaSqlProvider;
+import com.longkai.canteenorderingsystem.pojo.AdminInfo;
 import com.longkai.canteenorderingsystem.pojo.UserInfo;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
@@ -38,7 +39,8 @@ public interface UserInfoDao {
     @Update("update user_info set status = #{flag} where id in (${ids})")
     void updateStatus(@Param("ids") String ids, @Param("flag") int flag);
 
-
+    @Select("select * from user_info where userName = #{userName} and password = #{password}")
+    UserInfo selectByNameAndPassword(UserInfo userInfo);
 
 }
 

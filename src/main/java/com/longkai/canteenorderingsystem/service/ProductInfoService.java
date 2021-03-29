@@ -20,5 +20,7 @@ public interface ProductInfoService {
     List<ProductInfo> getOnSaleProduct();
 
     ProductInfo getProductInfoById(int id);
+
+    List<ProductInfo>getAll();
 }
 

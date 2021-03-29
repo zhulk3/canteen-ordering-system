@@ -5,7 +5,7 @@
   Time: 11:12 上午
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>创建订单</title>
@@ -39,12 +39,12 @@
                          data-options="valueField:'id',textField:'userName',url:'userinfo/getValidUser'">&nbsp;&nbsp;&nbsp;
         订单金额&nbsp;<input type="text" name="create_orderprice"
                          id="create_orderprice" class="easyui-textbox" readonly="readonly"
-                         style="width: 115px" /> &nbsp;&nbsp;
+                         style="width: 115px"/> &nbsp;&nbsp;
     </div>
     <div style="padding: 3px">
         订单日期&nbsp;<input type="text" name="create_ordertime"
                          id="create_ordertime" class="easyui-datebox" style="width: 115px"
-                         value="<%=new Date().toLocaleString()%>" /> &nbsp;&nbsp;
+                         value="<%=new Date().toLocaleString()%>"/> &nbsp;&nbsp;
         订单状态&nbsp;<select id="create_status" class="easyui-combobox"
                           name="create_status" style="width: 115px;">
         <option value="未付款" selected>未付款</option>
@@ -58,33 +58,33 @@
 
 <script type="text/javascript">
     var $odbox = $('#odbox');
-    $(function() {
+    $(function () {
         $odbox.datagrid({
-            rownumbers : true,
-            singleSelect : false,
-            fit : true,
-            toolbar : '#ordertb',
-            header : '#divOrderInfo',
-            columns : [
+            rownumbers: true,
+            singleSelect: false,
+            fit: true,
+            toolbar: '#ordertb',
+            header: '#divOrderInfo',
+            columns: [
                 [
                     {
-                        title : '序号',
-                        field : '',
-                        align : 'center',
-                        checkbox : true
+                        title: '序号',
+                        field: '',
+                        align: 'center',
+                        checkbox: true
                     }, {
-                    field : 'pid',
-                    title : '商品名称',
-                    width : 300,
-                    editor : {
-                        type : 'combobox',
-                        options : {
-                            valueField : 'id',
-                            textField : 'name',
-                            url : 'productinfo/getOnSaleProduct',
+                    field: 'pid',
+                    title: '商品名称',
+                    width: 300,
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'name',
+                            url: 'productinfo/getOnSaleProduct',
                             onChange: function (newValue, oldValue) {
                                 var rows = $odbox.datagrid('getRows');
-                                var orderprice=0;
+                                var orderprice = 0;
                                 for (var i = 0; i < rows.length; i++) {
                                     var pidEd = $('#odbox').datagrid('getEditor', {
                                         index: i,
@@ -102,46 +102,46 @@
                                         index: i,
                                         field: 'num'
                                     });
-                                    if (pidEd != null){
-                                        var pid=$(pidEd.target).combobox('getValue');
+                                    if (pidEd != null) {
+                                        var pid = $(pidEd.target).combobox('getValue');
                                         $.ajax({
                                             type: 'POST',
                                             url: 'productinfo/getPriceById',
-                                            data: {pid : pid},
-                                            success:  function(result) {
-                                                $(priceEd.target).numberbox('setValue',result);
-                                                $(totalpriceEd.target).numberbox('setValue',result * $(numEd.target).numberbox('getValue'));
-                                                orderprice=Number(orderprice)+Number($(totalpriceEd.target).numberbox('getValue'));
+                                            data: {pid: pid},
+                                            success: function (result) {
+                                                $(priceEd.target).numberbox('setValue', result);
+                                                $(totalpriceEd.target).numberbox('setValue', result * $(numEd.target).numberbox('getValue'));
+                                                orderprice = Number(orderprice) + Number($(totalpriceEd.target).numberbox('getValue'));
                                             },
                                             dataType: 'json',
-                                            async : false
+                                            async: false
                                         });
                                     }
                                 }
-                                $("#create_orderprice").textbox("setValue",orderprice);
+                                $("#create_orderprice").textbox("setValue", orderprice);
                             }
                         }
                     }
                 }, {
-                    field : 'price',
-                    title : '单价',
-                    width : 80,
+                    field: 'price',
+                    title: '单价',
+                    width: 80,
                     editor: {
-                        type : "numberbox",
+                        type: "numberbox",
                         options: {
-                            editable : false
+                            editable: false
                         }
                     }
-                } , {
-                    field : 'num',
-                    title : '数量',
-                    width : 50,
-                    editor : {
-                        type : 'numberbox',
-                        options :{
+                }, {
+                    field: 'num',
+                    title: '数量',
+                    width: 50,
+                    editor: {
+                        type: 'numberbox',
+                        options: {
                             onChange: function (newValue, oldValue) {
                                 var rows = $odbox.datagrid('getRows');
-                                var orderprice=0;
+                                var orderprice = 0;
                                 for (var i = 0; i < rows.length; i++) {
                                     var priceEd = $('#odbox').datagrid('getEditor', {
                                         index: i,
@@ -155,33 +155,33 @@
                                         index: i,
                                         field: 'num'
                                     });
-                                    $(totalpriceEd.target).numberbox('setValue',$(priceEd.target).numberbox('getValue') * $(numEd.target).numberbox('getValue'));
-                                    orderprice=Number(orderprice)+Number($(totalpriceEd.target).numberbox('getValue'));
+                                    $(totalpriceEd.target).numberbox('setValue', $(priceEd.target).numberbox('getValue') * $(numEd.target).numberbox('getValue'));
+                                    orderprice = Number(orderprice) + Number($(totalpriceEd.target).numberbox('getValue'));
                                 }
-                                $("#create_orderprice").textbox("setValue",orderprice);
+                                $("#create_orderprice").textbox("setValue", orderprice);
                             }
                         }
                     }
                 }, {
-                    field : 'totalprice',
-                    title : '小计',
-                    width : 100,
+                    field: 'totalprice',
+                    title: '小计',
+                    width: 100,
                     editor: {
-                        type : "numberbox",
+                        type: "numberbox",
                         options: {
-                            editable : false
+                            editable: false
                         }
                     }
-                }  ] ]
+                }]]
         });
     });
 
     // datagrid中添加记录行
     function addOrderDetail() {
         $odbox.datagrid('appendRow', {
-            num : '1',
-            price : '0',
-            totalprice : '0'
+            num: '1',
+            price: '0',
+            totalprice: '0'
         });
         var rows = $odbox.datagrid('getRows');
         // 让添加的行处于可编辑状态
@@ -194,7 +194,7 @@
         var rows = $odbox.datagrid('getSelections');
         if (rows.length > 0) {
             // 获取“订单金额”文本域的值
-            var create_orderprice =  $("#create_orderprice").textbox("getValue");
+            var create_orderprice = $("#create_orderprice").textbox("getValue");
             // 遍历选中的行记录，以更新订单金额
             for (var i = 0; i < rows.length; i++) {
                 var index = $odbox.datagrid('getRowIndex', rows[i]);
@@ -205,7 +205,7 @@
                 create_orderprice = create_orderprice - Number($(totalpriceEd.target).numberbox('getValue'));
                 $odbox.datagrid('deleteRow', index);
             }
-            $("#create_orderprice").textbox("setValue",create_orderprice);
+            $("#create_orderprice").textbox("setValue", create_orderprice);
         } else {
             $.messager.alert('提示', '请选择要删除的行', 'info');
         }
@@ -215,7 +215,7 @@
     function saveorder() {
         // 获取订单客户
         var uid = $("#create_uid").combobox("getValue");
-        if(uid==0){
+        if (uid == 0) {
             $.messager.alert('提示', '请选择客户名称', 'info');
         } else {
             // 取消datagrid控件的行编辑状态
@@ -229,10 +229,10 @@
             // 获取订单金额
             var orderprice = $("#create_orderprice").textbox("getValue");
             orderinfo.push({
-                ordertime : ordertime,
-                uid : uid,
-                status : status,
-                orderprice : orderprice
+                ordertime: ordertime,
+                uid: uid,
+                status: status,
+                orderprice: orderprice
             });
             // 获取订单明细（即datagrid控件中的记录）
             if ($odbox.datagrid('getChanges').length) {
@@ -252,7 +252,7 @@
                 $.post(
                     "orderinfo/commitOrder",
                     effectRow,
-                    function(data) {
+                    function (data) {
                         if (data == 'success') {
                             $.messager.alert("提示", "创建成功！");
                             $odbox.datagrid('acceptChanges');
@@ -277,6 +277,5 @@
         }
     }
 </script>
-
 </body>
 </html>

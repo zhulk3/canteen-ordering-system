@@ -1,6 +1,7 @@
 package com.longkai.canteenorderingsystem.controller;
 
 import com.longkai.canteenorderingsystem.pojo.Canteen;
+import com.longkai.canteenorderingsystem.pojo.Type;
 import com.longkai.canteenorderingsystem.service.CanteenInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,19 @@ public class CanteenInfoController {
     public List<Canteen> getCanteen() {
         List<Canteen> canteensList = canteenInfoService.getAll();
         return canteensList;
+    }
+
+    @RequestMapping(value = "/getSelectCanteenList/{flag}")
+    @ResponseBody
+    public List<Canteen> getSelectCanteenList(@PathVariable("flag") Integer flag) {
+        List<Canteen> canteenList = canteenInfoService.getAll();
+        if (flag == 1) {
+            Canteen t = new Canteen();
+            t.setId(0);
+            t.setName("请选择");
+            canteenList.add(t);
+        }
+        return canteenList;
     }
 
     @RequestMapping(value = "/addCanteen", produces = "text/html;charset=UTF-8")

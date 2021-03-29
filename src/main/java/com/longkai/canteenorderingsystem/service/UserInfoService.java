@@ -18,6 +18,8 @@ public interface UserInfoService {
 
     void modifyStatus(String ids,int flag);
 
+    UserInfo login(UserInfo userInfo);
+
 }
 
 

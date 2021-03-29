@@ -107,6 +107,18 @@
                                data-options="multiline:true" style="height: 60px"></input></td>
                 </tr>
                 <tr>
+                    <td>食堂:</td>
+                    <td><input style="width: 300px;" id="whichCanteens.id"
+                               class="easyui-combobox" name="whichCanteen.id"
+                               data-options="valueField:'id',textField:'name',url:'canteen/getSelectCanteenList/0'"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>提供日期:</td>
+                    <td><input class="easyui-textbox" name="whichday" id="whichdya"
+                               data-options="multiline:true" style="height: 60px"></input></td>
+                </tr>
+                <tr>
                     <td>商品图片:</td>
                     <td><input class="easyui-filebox" id="file" name="file"
                                style="width: 200px" value="选择图片"></input></td>
@@ -141,7 +153,7 @@
             }, {
                 field : 'name',
                 title : '商品名称',
-                width : 200
+                width : 100
             }, {
                 field : 'type',
                 title : '商品类型',
@@ -180,6 +192,21 @@
                 field : 'intro',
                 title : '商品描述',
                 width : 650
+            },{
+                field : 'whichCanteens',
+                title : '提供食堂',
+                formatter : function(value, row, index) {
+                    if (row.type) {
+                        return row.whichCanteens.name;
+                    } else {
+                        return value;
+                    }
+                },
+                width : 100
+            },{
+                field : 'whichday',
+                title : '提供日期',
+                width : 100
             } ] ]
         });
     });
@@ -267,6 +294,9 @@
                     "price" : row.price,
                     "intro" : row.intro,
                     "status" : row.status,
+                    "whichday":row.whichday,
+                    "whichCanteens.id":row.whichCanteens.id,
+                    "pic":row.pic,
                 });
                 urls = "productinfo/updateProduct?id=" + row.id;
             }

@@ -4,10 +4,17 @@ package com.longkai.canteenorderingsystem.controller;
 import com.longkai.canteenorderingsystem.pojo.Pager;
 import com.longkai.canteenorderingsystem.pojo.ProductInfo;
 import com.longkai.canteenorderingsystem.service.ProductInfoService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +50,29 @@ public class ProductInfoController {
         return result;
     }
 
+    @RequestMapping(value = "/imageDownload",method = RequestMethod.GET, produces = "image/png")
+    public ResponseEntity<byte[]> fileDownload(@RequestParam("fileName") String fileName, HttpServletRequest httpServletRequest, Model model) throws IOException {
+        System.out.println(fileName+"fileName");
+        String path = httpServletRequest.getServletContext().getRealPath("/product_images/");
+        File file = new File(path + File.separator + fileName);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        String downloadFileName = new String(fileName.getBytes(StandardCharsets.UTF_8), "UTF-8");
+        httpHeaders.setContentDispositionFormData("attachment", downloadFileName);
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        try {
+            ResponseEntity ans= new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), httpHeaders, HttpStatus.CREATED);
+            return ans;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping("/all")
+    public List<ProductInfo>getAll(){
+        return productInfoService.getAll();
+    }
     @RequestMapping(value = "/addProduct", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String addProduct(ProductInfo pi, @RequestParam(value = "file", required = false) MultipartFile file,

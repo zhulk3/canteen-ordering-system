@@ -61,5 +61,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public ProductInfo getProductInfoById(int id) {
         return productInfoDao.getProductInfoById(id);
     }
+
+    @Override
+    public List<ProductInfo> getAll() {
+        return productInfoDao.getAll();
+    }
 }
 

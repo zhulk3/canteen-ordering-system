@@ -53,5 +53,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void modifyStatus(String ids, int flag) {
         userInfoDao.updateStatus(ids, flag);
     }
+
+    @Override
+    public UserInfo login(UserInfo userInfo) {
+        return userInfoDao.selectByNameAndPassword(userInfo);
+    }
 }
 

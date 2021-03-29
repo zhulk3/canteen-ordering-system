@@ -1,10 +1,12 @@
 package com.longkai.canteenorderingsystem.controller;
 
+import com.longkai.canteenorderingsystem.pojo.AdminInfo;
 import com.longkai.canteenorderingsystem.pojo.Pager;
 import com.longkai.canteenorderingsystem.pojo.UserInfo;
 import com.longkai.canteenorderingsystem.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,21 @@ public class UserInfoController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @RequestMapping(value = "/login")
+    @ResponseBody
+    public String login(@RequestParam("name") String name,@RequestParam("password") String password) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName(name);
+        userInfo.setPassword(password);
+        System.out.println(userInfo);
+        UserInfo ui = userInfoService.login(userInfo);
+        if (ui != null) {
+            return "{\"success\":\"true\",\"message\":\"登录成功\"}";
+        } else {
+            return "{\"success\":\"false\",\"message\":\"登录失败\"}";
+        }
+    }
 
     @ResponseBody
     @RequestMapping(value = "/getValidUser")

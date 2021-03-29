@@ -12,6 +12,24 @@ public class ProductInfo {
     private int status;
     private double priceFrom;
     private double priceTo;
+    private Canteen whichCanteens;
+    private int whichday;
+
+    public Canteen getWhichCanteens() {
+        return whichCanteens;
+    }
+
+    public void setWhichCanteens(Canteen whichCanteens) {
+        this.whichCanteens = whichCanteens;
+    }
+
+    public int getWhichday() {
+        return whichday;
+    }
+
+    public void setWhichday(int whichday) {
+        this.whichday = whichday;
+    }
 
     public void setId(int id) {
         this.id = id;
