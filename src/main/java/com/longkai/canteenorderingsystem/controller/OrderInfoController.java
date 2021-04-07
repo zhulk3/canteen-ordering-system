@@ -37,6 +37,8 @@ public class OrderInfoController {
     public String commitOrder(String inserted, String orderinfo)
             throws JsonParseException, JsonMappingException, IOException {
         try {
+            System.out.println(inserted+"zhu");
+            System.out.println(orderinfo+"long");
             // 创建ObjectMapper对象,实现JavaBean和JSON的转换
             ObjectMapper mapper = new ObjectMapper();
             // 设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
@@ -110,7 +112,6 @@ public class OrderInfoController {
         OrderInfo oi = orderInfoService.getOrderInfoById(Integer.parseInt(oid));
         System.out.println(oi);
         model.addAttribute("oi", oi);
-
         return "orderdetail";
     }
 
@@ -122,8 +123,18 @@ public class OrderInfoController {
             // od.setPid(od.getPi().getId());
             od.setPrice(od.getPi().getPrice());
             od.setTotalprice(od.getPi().getPrice() * od.getNum());
+            System.out.println(od);
         }
         return ods;
     }
+
+
+    @RequestMapping("/findOrderInfo")
+    @ResponseBody
+    public List<OrderInfo> findOrderInfoByUid(@RequestParam("uid") String uid){
+        return orderInfoService.getOrderInfoByUid(Integer.parseInt(uid));
+    }
+
+
 }
 

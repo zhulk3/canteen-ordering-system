@@ -69,5 +69,10 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         }
         return result;
     }
+
+    @Override
+    public List<OrderInfo> getOrderInfoByUid(int uid) {
+        return orderInfoDao.selectOrderInfoByUid(uid);
+    }
 }
 

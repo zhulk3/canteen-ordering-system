@@ -14,6 +14,15 @@ public class ProductInfo {
     private double priceTo;
     private Canteen whichCanteens;
     private int whichday;
+    private int whichMeal;
+
+    public int getWhichMeal() {
+        return whichMeal;
+    }
+
+    public void setWhichMeal(int whichMeal) {
+        this.whichMeal = whichMeal;
+    }
 
     public Canteen getWhichCanteens() {
         return whichCanteens;
@@ -118,6 +127,26 @@ public class ProductInfo {
 
     public double getPriceTo() {
         return priceTo;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductInfo{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", pic='" + pic + '\'' +
+                ", num=" + num +
+                ", price=" + price +
+                ", intro='" + intro + '\'' +
+                ", status=" + status +
+                ", priceFrom=" + priceFrom +
+                ", priceTo=" + priceTo +
+                ", whichCanteens=" + whichCanteens +
+                ", whichday=" + whichday +
+                ", whichMeal=" + whichMeal +
+                '}';
     }
 }
 

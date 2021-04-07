@@ -28,13 +28,23 @@ public class UserInfoController {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName(name);
         userInfo.setPassword(password);
-        System.out.println(userInfo);
         UserInfo ui = userInfoService.login(userInfo);
         if (ui != null) {
             return "{\"success\":\"true\",\"message\":\"登录成功\"}";
         } else {
             return "{\"success\":\"false\",\"message\":\"登录失败\"}";
         }
+    }
+
+    @RequestMapping(value = "/getUserInfo")
+    @ResponseBody
+    public UserInfo getUserInfo(@RequestParam("name") String name,@RequestParam("password") String password){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName(name);
+        userInfo.setPassword(password);
+        System.out.println(userInfo+"getUserInfo");
+        UserInfo ui = userInfoService.login(userInfo);
+        return ui;
     }
 
     @ResponseBody

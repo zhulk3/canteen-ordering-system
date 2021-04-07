@@ -21,5 +21,6 @@ public interface OrderInfoService {
     List<OrderDetail> getOrderDetailByOid(int oid);
 
     int deleteOrder(int id);
+    List<OrderInfo> getOrderInfoByUid(int uid);
 }
 

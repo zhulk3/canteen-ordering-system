@@ -25,16 +25,16 @@
     function checkAdminLogin() {
         $("#adminLoginForm").form("submit", {
             // 向控制器类AdminInfoController中login方法发送请求
-            url : 'admininfo/login',
-            success : function(result) {
+            url: 'admininfo/login',
+            success: function (result) {
                 var result = eval('(' + result + ')');
                 if (result.success == 'true') {
                     window.location.href = 'admin.jsp';
                     $("#adminLoginDlg").dialog("close");
                 } else {
                     $.messager.show({
-                        title : "提示信息",
-                        msg : result.message
+                        title: "提示信息",
+                        msg: result.message
                     });
                 }
             }
@@ -47,7 +47,7 @@
     <form id="adminLoginForm" method="post">
         <table style="margin:20px;font-size: 13px;">
             <tr>
-                <th >用户名</th>
+                <th>用户名</th>
                 <td><input class="easyui-textbox" type="text" id="name"
                            name="name" data-options="required:true" value="firstcanteen"></input></td>
             </tr>

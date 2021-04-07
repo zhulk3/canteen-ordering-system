@@ -39,6 +39,15 @@ public interface UserInfoDao {
     @Update("update user_info set status = #{flag} where id in (${ids})")
     void updateStatus(@Param("ids") String ids, @Param("flag") int flag);
 
+    @Results({@Result(id = true,column = "id",property = "id"),
+            @Result(column = "password",property = "password"),
+            @Result(column = "sex",property = "sex"),
+            @Result(column = "realName",property = "realName"),
+            @Result(column = "address",property = "address"),
+            @Result(column = "regDate",property = "regDate"),
+            @Result(column = "status",property = "status"),
+            @Result(column = "balance",property = "balance"),
+            @Result(column = "sid",property = "school",one = @One(select = "com.longkai.canteenorderingsystem.dao.SchoolDao.selectById",fetchType = FetchType.EAGER))})
     @Select("select * from user_info where userName = #{userName} and password = #{password}")
     UserInfo selectByNameAndPassword(UserInfo userInfo);
 

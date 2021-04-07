@@ -75,5 +75,19 @@ public class OrderDetail {
     public double getTotalprice() {
         return totalprice;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "id=" + id +
+                ", oid=" + oid +
+                ", oi=" + oi +
+                ", pid=" + pid +
+                ", pi=" + pi +
+                ", num=" + num +
+                ", price=" + price +
+                ", totalprice=" + totalprice +
+                '}';
+    }
 }
 

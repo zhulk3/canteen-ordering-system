@@ -73,11 +73,11 @@
                 field: 'sno',
                 title: '学号',
                 width: 80
-            },{
+            }, {
                 field: 'balance',
                 title: '余额',
                 width: 80
-            },{
+            }, {
                 field: 'sex',
                 title: '性别',
                 width: 100
@@ -89,9 +89,9 @@
                 field: 'email',
                 title: '邮箱',
                 width: 150
-            },{
+            }, {
                 field: 'school',
-                title: '院系',formatter : function(value, row, index) {
+                title: '院系', formatter: function (value, row, index) {
                     if (row.school) {
                         return row.school.name;
                     } else {

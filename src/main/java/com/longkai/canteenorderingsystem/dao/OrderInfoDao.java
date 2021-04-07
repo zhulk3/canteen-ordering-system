@@ -41,5 +41,9 @@ public interface OrderInfoDao {
 
     @Delete("delete from order_detail where oid = #{id}")
     int deleteOrderDetail(int id);
+
+    @Select("select * from order_info where uid = #{uid}")
+    List<OrderInfo> selectOrderInfoByUid(int uid);
+
 }
 

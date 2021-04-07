@@ -40,19 +40,19 @@ public class ProductInfoController {
         Pager pager = new Pager();
         pager.setCurPage(page);
         pager.setPerPageRows(rows);
-        Map<String, Object> map = new HashMap<String,Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("productInfo", productInfo);
         int totalCount = productInfoService.count(map);
         List<ProductInfo> productInfoList = productInfoService.findProductInfo(productInfo, pager);
-        Map<String, Object> result = new HashMap<String,Object>(2);
+        Map<String, Object> result = new HashMap<String, Object>(2);
         result.put("total", totalCount);
         result.put("rows", productInfoList);
         return result;
     }
 
-    @RequestMapping(value = "/imageDownload",method = RequestMethod.GET, produces = "image/png")
+    @RequestMapping(value = "/imageDownload", method = RequestMethod.GET, produces = "image/png")
     public ResponseEntity<byte[]> fileDownload(@RequestParam("fileName") String fileName, HttpServletRequest httpServletRequest, Model model) throws IOException {
-        System.out.println(fileName+"fileName");
+        System.out.println(fileName + "fileName");
         String path = httpServletRequest.getServletContext().getRealPath("/product_images/");
         File file = new File(path + File.separator + fileName);
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -60,9 +60,9 @@ public class ProductInfoController {
         httpHeaders.setContentDispositionFormData("attachment", downloadFileName);
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         try {
-            ResponseEntity ans= new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), httpHeaders, HttpStatus.CREATED);
+            ResponseEntity ans = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file), httpHeaders, HttpStatus.CREATED);
             return ans;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -70,9 +70,10 @@ public class ProductInfoController {
 
     @ResponseBody
     @RequestMapping("/all")
-    public List<ProductInfo>getAll(){
+    public List<ProductInfo> getAll() {
         return productInfoService.getAll();
     }
+
     @RequestMapping(value = "/addProduct", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String addProduct(ProductInfo pi, @RequestParam(value = "file", required = false) MultipartFile file,

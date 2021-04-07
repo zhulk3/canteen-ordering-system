@@ -41,10 +41,9 @@
                              data-options="valueField:'id',textField:'userName',url:'userinfo/getValidUser'">&nbsp;&nbsp;&nbsp;
             订单状态&nbsp;<select id="search_status" class="easyui-combobox" name="search_status" style="width:115px;">
             <option value="请选择" selected>请选择</option>
-            <option value="未付款">未付款</option>
-            <option value="已付款">已付款</option>
-            <option value="待发货">待发货</option>
-            <option value="已发货">已发货</option>
+            <option value="待处理">待处理</option>
+            <option value="处理中">处理中</option>
+            <option value="待取餐">待取餐</option>
             <option value="已完成">已完成</option>
         </select>&nbsp;&nbsp;&nbsp; 订单时间 &nbsp;<input class="easyui-datebox"
                                                       name="orderTimeFrom" id="orderTimeFrom" style="width:115px;" /> ~

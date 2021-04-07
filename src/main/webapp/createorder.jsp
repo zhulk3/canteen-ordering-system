@@ -47,10 +47,9 @@
                          value="<%=new Date().toLocaleString()%>"/> &nbsp;&nbsp;
         订单状态&nbsp;<select id="create_status" class="easyui-combobox"
                           name="create_status" style="width: 115px;">
-        <option value="未付款" selected>未付款</option>
-        <option value="已付款">已付款</option>
-        <option value="待发货">待发货</option>
-        <option value="已发货">已发货</option>
+        <option value="待处理" selected>待处理</option>
+        <option value="处理中">处理中</option>
+        <option value="待取餐">待取餐</option>
         <option value="已完成">已完成</option>
     </select>
     </div>

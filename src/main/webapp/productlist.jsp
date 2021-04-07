@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>商品列表</title>
+    <title>菜品列表</title>
     <link href="EasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css"/>
     <link href="EasyUI/themes/icon.css" rel="stylesheet" type="text/css"/>
     <link href="EasyUI/demo/demo.css" rel="stylesheet" type="text/css"/>
@@ -33,18 +33,18 @@
 <div id="searchtb_productinfo" style="padding: 2px 5px;">
     <form id="searchForm_productinfo" method="post">
         <div style="padding: 3px">
-            商品编号&nbsp;&nbsp;<input class="easyui-textbox"
+            菜品编号&nbsp;&nbsp;<input class="easyui-textbox"
                                    name="productinfo_search_code" id="productinfo_search_code"
                                    style="width: 110px" />
         </div>
         <div style="padding: 3px">
-            商品名称&nbsp;&nbsp;<input class="easyui-textbox"
+            菜品名称&nbsp;&nbsp;<input class="easyui-textbox"
                                    name="productinfo_search_name" id="productinfo_search_name"
-                                   style="width: 110px" /> &nbsp;&nbsp;商品类型&nbsp;&nbsp;<input
+                                   style="width: 110px" /> &nbsp;&nbsp;菜品类型&nbsp;&nbsp;<input
                 style="width: 110px;" id="productinfo_search_tid"
                 class="easyui-combobox" name="productinfo_search_tid"
                 data-options="valueField:'id',textField:'name',url:'type/getType/1'"
-                value="0">&nbsp;&nbsp; 商品品牌&nbsp;&nbsp;<input
+                value="0">&nbsp;&nbsp; 菜品品牌&nbsp;&nbsp;<input
                 class="easyui-textbox" name="productinfo_search_brand"
                 id="productinfo_search_brand" style="width: 110px" />
             &nbsp;&nbsp;价格: <input class="easyui-numberbox"
@@ -58,15 +58,15 @@
     </form>
 </div>
 
-<!-- 添加商品信息对话框 -->
-<div id="dlg_productinfo" class="easyui-dialog" title="添加商品"
+<!-- 添加菜品信息对话框 -->
+<div id="dlg_productinfo" class="easyui-dialog" title="添加菜品"
      closed="true" style="width: 500px;">
     <div style="padding: 10px 60px 20px 60px">
         <form id="ff_productinfo" method="POST" action=""
               enctype="multipart/form-data">
             <table cellpadding="5">
                 <tr>
-                    <td>商品状态:</td>
+                    <td>菜品状态:</td>
                     <td><select id="status" class="easyui-combobox" name="status"
                                 style="width: 150px;">
                         <option value="1">在售</option>
@@ -74,35 +74,35 @@
                     </select></td>
                 </tr>
                 <tr>
-                    <td>商品类型:</td>
+                    <td>菜品类型:</td>
                     <td><input style="width: 300px;" id="type.id"
                                class="easyui-combobox" name="type.id"
                                data-options="valueField:'id',textField:'name',url:'type/getType/0'"></input>
                     </td>
                 </tr>
                 <tr>
-                    <td>商品名称:</td>
+                    <td>菜品名称:</td>
                     <td><input class="easyui-textbox" type="text" id="name"
                                name="name" data-options="required:true"></input></td>
                 </tr>
                 <tr>
-                    <td>商品编码:</td>
+                    <td>菜品编码:</td>
                     <td><input class="easyui-textbox" type="text" id="code"
                                name="code" data-options="required:true"></input></td>
                 </tr>
                 <tr>
                 <tr>
-                    <td>商品数量:</td>
+                    <td>菜品数量:</td>
                     <td><input class="easyui-textbox" type="text" id="num"
                                name="num" data-options="required:true"></input></td>
                 </tr>
                 <tr>
-                    <td>商品价格:</td>
+                    <td>菜品价格:</td>
                     <td><input class="easyui-textbox" type="text" id="price"
                                name="price" data-options="required:true"></input></td>
                 </tr>
                 <tr>
-                    <td>商品描述:</td>
+                    <td>菜品描述:</td>
                     <td><input class="easyui-textbox" name="intro" id="intro"
                                data-options="multiline:true" style="height: 60px"></input></td>
                 </tr>
@@ -115,11 +115,16 @@
                 </tr>
                 <tr>
                     <td>提供日期:</td>
-                    <td><input class="easyui-textbox" name="whichday" id="whichdya"
+                    <td><input class="easyui-textbox" name="whichday" id="whichday"
                                data-options="multiline:true" style="height: 60px"></input></td>
                 </tr>
                 <tr>
-                    <td>商品图片:</td>
+                    <td>提供时间:</td>
+                    <td><input class="easyui-textbox" name="whichday" id="whichMeal"
+                               data-options="multiline:true" style="height: 60px"></input></td>
+                </tr>
+                <tr>
+                    <td>菜品图片:</td>
                     <td><input class="easyui-filebox" id="file" name="file"
                                style="width: 200px" value="选择图片"></input></td>
                 </tr>
@@ -152,11 +157,11 @@
                 checkbox : true
             }, {
                 field : 'name',
-                title : '商品名称',
+                title : '菜品名称',
                 width : 100
             }, {
                 field : 'type',
-                title : '商品类型',
+                title : '菜品类型',
                 formatter : function(value, row, index) {
                     if (row.type) {
                         return row.type.name;
@@ -167,7 +172,7 @@
                 width : 100
             }, {
                 field : 'status',
-                title : '商品状态',
+                title : '菜品状态',
                 formatter : function(value, row, index) {
                     if (row.status == 1) {
                         return "在售";
@@ -178,7 +183,7 @@
                 width : 60
             }, {
                 field : 'code',
-                title : '商品编码',
+                title : '菜品编码',
                 width : 100
             },  {
                 field : 'price',
@@ -190,7 +195,7 @@
                 width : 50
             }, {
                 field : 'intro',
-                title : '商品描述',
+                title : '菜品描述',
                 width : 650
             },{
                 field : 'whichCanteens',
@@ -207,14 +212,25 @@
                 field : 'whichday',
                 title : '提供日期',
                 width : 100
-            } ] ]
+            } ,{
+                field : 'whichMeal',
+                title : '提供时间',
+                formatter : function(value, row, index) {
+                    if (row.whichMeal == 0) {
+                        return "中午";
+                    } else {
+                        return "晚上";
+                    }
+                },
+                width : 100
+            }] ]
         });
     });
 
     var urls;
     var data;
 
-    // 删除商品(商品下架)
+    // 删除菜品(菜品下架)
     function removeProduct() {
         var rows = $("#dg_productinfo").datagrid('getSelections');
         if (rows.length > 0) {
@@ -248,14 +264,14 @@
         }
     }
 
-    // 打开新增商品对话框
+    // 打开新增菜品对话框
     function addProduct() {
-        $('#dlg_productinfo').dialog('open').dialog('setTitle', '新增商品');
+        $('#dlg_productinfo').dialog('open').dialog('setTitle', '新增菜品');
         $('#dlg_productinfo').form('clear');
         urls = 'productinfo/addProduct';
     }
 
-    // 保存商品信息
+    // 保存菜品信息
     function saveProduct() {
         $("#ff_productinfo").form("submit", {
             url : urls, //使用参数
@@ -277,15 +293,15 @@
         $('#ff_productinfo').form('clear');
     }
 
-    // 打开修改商品对话框(与新增商品对话框共用)
+    // 打开修改菜品对话框(与新增菜品对话框共用)
     function editProduct() {
         var rows = $("#dg_productinfo").datagrid('getSelections');
         if (rows.length > 0) {
             var row = $("#dg_productinfo").datagrid("getSelected");
             if (row) {
                 $("#dlg_productinfo").dialog("open").dialog('setTitle',
-                    '修改商品信息');
-                $("#ff_productinfo").form("load", {
+                    '修改菜品信息');
+                $("#ff_productinfo").form("reload", {
                     "type.id" : row.type.id,
                     "name" : row.name,
                     "code" : row.code,
@@ -295,6 +311,7 @@
                     "intro" : row.intro,
                     "status" : row.status,
                     "whichday":row.whichday,
+                    "whcihMeal":row.whichMeal,
                     "whichCanteens.id":row.whichCanteens.id,
                     "pic":row.pic,
                 });
@@ -305,7 +322,7 @@
         }
     }
 
-    // 查询商品
+    // 查询菜品
     function searchProduct() {
         var productinfo_search_code = $('#productinfo_search_code')
             .textbox("getValue");

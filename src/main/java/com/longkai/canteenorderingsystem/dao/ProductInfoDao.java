@@ -19,9 +19,12 @@ public interface ProductInfoDao {
             @Result(column = "pic", property = "pic"), @Result(column = "num", property = "num"),
             @Result(column = "price", property = "price"), @Result(column = "intro", property = "intro"),
             @Result(column = "status", property = "status"),
-            @Result(column = "whichday",property = "whichday"),
-            @Result(column = "cid",property = "whichCanteens",one = @One(select = "com.longkai.canteenorderingsystem.dao.CanteenDao.selectCanteenById",fetchType = FetchType.EAGER)),
-            @Result(column = "tid", property = "type", one = @One(select = "com.longkai.canteenorderingsystem.dao.TypeDao.selectById", fetchType = FetchType.EAGER))})
+            @Result(column = "whichday", property = "whichday"),
+            @Result(column = "whichMeal", property = "whichMeal"),
+            @Result(column = "cid", property = "whichCanteens", one = @One(select = "com.longkai.canteenorderingsystem." +
+                    "dao.CanteenDao.selectCanteenById", fetchType = FetchType.EAGER)),
+            @Result(column = "tid", property = "type", one = @One(select = "com.longkai.canteenorderingsystem." +
+                    "dao.TypeDao.selectById", fetchType = FetchType.EAGER))})
     @SelectProvider(type = ProductInfoDynaSqlProvider.class, method = "selectWithParam")
     List<ProductInfo> selectByPager(Map<String, Object> params);
 
@@ -50,12 +53,14 @@ public interface ProductInfoDao {
 
     // 根据产品id获取商品对象
     @Select("select * from product_info where id=#{id}")
+    @Results({@Result(column = "cid", property = "whichCanteens", one = @One(select = "com.longkai.canteenorderingsystem.dao.CanteenDao.selectCanteenById", fetchType = FetchType.EAGER)),
+            @Result(column = "tid", property = "type", one = @One(select = "com.longkai.canteenorderingsystem.dao.TypeDao.selectById", fetchType = FetchType.EAGER))})
     ProductInfo getProductInfoById(int id);
 
     @Select("select * from product_info")
     @Results({@Result(column = "cid", property = "whichCanteens", one = @One(select = "com.longkai.canteenorderingsystem.dao.CanteenDao.selectCanteenById", fetchType = FetchType.EAGER)),
             @Result(column = "tid", property = "type", one = @One(select = "com.longkai.canteenorderingsystem.dao.TypeDao.selectById", fetchType = FetchType.EAGER))})
-    List<ProductInfo>getAll();
+    List<ProductInfo> getAll();
 
 }
 
